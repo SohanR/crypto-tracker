@@ -1,4 +1,4 @@
-import { AppBar, Container, MenuItem, Select, Toolbar, Typography } from '@material-ui/core'
+import { AppBar, Container, createTheme, MenuItem, Select, ThemeProvider, Toolbar, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -19,27 +19,37 @@ const Header = () => {
   const classes = useStyles();
 
   const naviGation = useNavigate();
+
+  const darkTheme = createTheme({
+    palette: {
+      primary:{
+        main:"#fff"
+      },
+      type: 'dark'
+    }
+  })
   return (
-   <AppBar color='transparent' position='static' >
-     <Container>
-       <Toolbar>
-         <Typography className={classes.title} onClick={() => naviGation("/")} >Crypto Tracker</Typography>
+    <ThemeProvider theme={darkTheme} >
+      <AppBar color='transparent' position='static' >
+        <Container>
+          <Toolbar>
+            <Typography variant='h6' className={classes.title} onClick={() => naviGation("/")} >Crypto Tracker</Typography>
 
-         <Select
-          variant="outlined"
-          style={{ 
-            width: '100',
-            height:'40',
-            marginLeft:'15'
-          }}
-         >
-           <MenuItem value={"USD"} >USD</MenuItem>
-           <MenuItem value={"BDT"} >BDT</MenuItem>
-         </Select>
-       </Toolbar>
-     </Container>
-
-   </AppBar>
+            <Select
+              variant="outlined"
+              style={{ 
+                width: '100',
+                height:'40',
+                marginRight:'15'
+              }}
+            >
+              <MenuItem value={"USD"} >USD</MenuItem>
+              <MenuItem value={"BDT"} >BDT</MenuItem>
+            </Select>
+          </Toolbar>
+        </Container>
+      </AppBar>
+   </ThemeProvider>
   )
 }
 
