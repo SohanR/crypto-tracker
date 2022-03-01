@@ -21,7 +21,7 @@ const Header = () => {
 
   const naviGation = useNavigate();
 
-  const { currency, setCurrency } = CryptoState
+  const { currency, setCurrency } = CryptoState()
 
   console.log(currency);
   const darkTheme = createTheme({

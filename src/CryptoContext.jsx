@@ -1,4 +1,4 @@
-import React, { Children, createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 
 const Crypto = createContext()
@@ -21,7 +21,7 @@ const CryptoContext = ({children}) => {
 
   return (
     <Crypto.Provider value={{currency,symbol,setCurrency}} >
-      {Children}
+      {children}
     </Crypto.Provider>
   )
 }
