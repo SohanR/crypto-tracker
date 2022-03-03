@@ -11,9 +11,9 @@ function App() {
   const useStyles = makeStyles(() =>({
     App: {
       backgroundColor: "#14161a",
-    color:"white",
-    minHeight:"100vh"
-  }
+      color:"white",
+      minHeight:"100vh"
+    }
   }))
 
   const classes = useStyles();
