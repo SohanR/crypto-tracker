@@ -1,7 +1,8 @@
 
-import { Container, createTheme, TextField, ThemeProvider, Typography } from '@material-ui/core';
+import { Container, createTheme, LinearProgress, makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider, Typography } from '@material-ui/core';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { CoinList } from '../config/api';
 import { CryptoState } from '../CryptoContext';
 
@@ -40,6 +41,20 @@ const CoinsTable = () => {
         }
     })
 
+    const handleSearch = () => {
+        return coins.filter((coin) => 
+            coin.name.toLowerCase().includes(search) ||
+            coin.symbol.toLowerCase().includes(search)
+
+        )
+    };
+
+    const useStyles = makeStyles(() =>({
+         
+    }))
+
+    const classes = useStyles();
+
   return (
     <ThemeProvider theme={darkTheme} >
         <Container style={{textAlign:"center"}} >
@@ -57,8 +72,59 @@ const CoinsTable = () => {
                 onChange={e => setSearch(e.target.value)}
             
             />
-        </Container>
 
+            <TableContainer>
+                {
+                    loading?(
+                        <LinearProgress style={{backgroundColor:"gold"}} />
+                    ) : (
+                       <Table>
+                           <TableHead style={{backgroundColor:"#eebc1d"}} >
+                               <TableRow>
+                                   {["Coin", "Price", "24h Change", "Market Cap"].map((head) => (
+                                       <TableCell
+                                            style={{
+                                                color:"black",
+                                                fontWeight:"700",
+                                                fontFamily:"Montserrat"
+                                            }}
+                                            key={head}
+                                            align={head === "Coin" ? "" : "right"}
+                                       >
+                                           {head}                        
+                                       </TableCell>           
+                                   ))}
+                               </TableRow>
+                           </TableHead>
+                           <TableBody>
+                               {handleSearch().map((row) =>{
+                                   const profit = row.price_change_percentage_24h > 0;
+
+                                   return(
+                                       <TableRow
+                                            onClick={() => <Link to={`/coins/${row.id}`} className={classes.row} key={row.name} />}
+                                       >
+                                           <TableCell component='th' scope='row'
+                                           style={{
+                                               display:'flex',
+                                               gap:15
+                                           }}
+                                           >
+
+                                           </TableCell>
+                                            
+                                       </TableRow>
+                                   )
+                               })}
+
+                           </TableBody>
+
+                       </Table>
+                    )
+                }
+            </TableContainer>
+
+        </Container>
     </ThemeProvider>
   )
 }
