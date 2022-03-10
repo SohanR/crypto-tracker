@@ -2,7 +2,6 @@
 import { Container, createTheme, LinearProgress, makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider, Typography } from '@material-ui/core';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { CoinList } from '../config/api';
 import { CryptoState } from '../CryptoContext';
 
@@ -91,7 +90,8 @@ const CoinsTable = () => {
                                             key={head}
                                             align={head === "Coin" ? "" : "right"}
                                        >
-                                           {head}                        
+                                           {head}        
+                                                       
                                        </TableCell>           
                                    ))}
                                </TableRow>
@@ -101,15 +101,23 @@ const CoinsTable = () => {
                                    const profit = row.price_change_percentage_24h > 0;
 
                                    return(
-                                       <TableRow
-                                            onClick={() => <Link to={`/coins/${row.id}`} className={classes.row} key={row.name} />}
+                                       <TableRow  key={row.name}
+                                            // onClick={() => <Link to={`/coins/${row.id}`} className={classes.row} key={row.name} />}
                                        >
-                                           <TableCell component='th' scope='row'
+                                           <TableCell component="th" scope="row"
                                            style={{
                                                display:'flex',
                                                gap:15
                                            }}
                                            >
+                                               <img 
+                                                    src={row?.image}
+                                                    alt={row.name}
+                                                    height="50"
+                                                    style={{ marginBottom:10}}
+                                               />
+
+                                               hello
 
                                            </TableCell>
                                             
