@@ -2,6 +2,7 @@
 import { Container, createTheme, LinearProgress, makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider, Typography } from '@material-ui/core';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import { CoinList } from '../config/api';
 import { CryptoState } from '../CryptoContext';
 
@@ -9,7 +10,7 @@ const CoinsTable = () => {
 
     const [coins, setCoins] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [search, setSearch] = useState();
+    const [search, setSearch] = useState("");
 
 
 
@@ -53,6 +54,7 @@ const CoinsTable = () => {
     }))
 
     const classes = useStyles();
+    const navigate = useNavigate();
 
   return (
     <ThemeProvider theme={darkTheme} >
@@ -102,7 +104,8 @@ const CoinsTable = () => {
 
                                    return(
                                        <TableRow  key={row.name}
-                                            // onClick={() => <Link to={`/coins/${row.id}`} className={classes.row} key={row.name} />}
+                                             onClick={() => navigate(`/coins/${row.id}`)}
+                                             className={classes.row}
                                        >
                                            <TableCell component="th" scope="row"
                                            style={{
@@ -117,7 +120,24 @@ const CoinsTable = () => {
                                                     style={{ marginBottom:10}}
                                                />
 
-                                               hello
+                                               <div style={{display:'flex', flexDirection:"column"}} >
+                                                   <span style={{
+                                                       textTransform:"uppercase",
+                                                       fontSize:22
+                                                   }} >
+                                                       {row.symbol}
+
+                                                   </span>
+
+                                                   <span style={{color:"darkgrey"}}>
+                                                       {row.name}
+                                                   </span>
+
+                                               </div>
+
+
+
+                                               
 
                                            </TableCell>
                                             
