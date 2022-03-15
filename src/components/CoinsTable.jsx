@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { CoinList } from '../config/api';
 import { CryptoState } from '../CryptoContext';
+import { numberWithCommas } from './Banner/Carousel';
 
 const CoinsTable = () => {
 
@@ -14,7 +15,7 @@ const CoinsTable = () => {
 
 
 
-    const {currency} = CryptoState();
+    const {currency, symbol} = CryptoState();
 
     // for fetch our coins 
     const fetchCoins = async () => {
@@ -132,13 +133,12 @@ const CoinsTable = () => {
                                                    <span style={{color:"darkgrey"}}>
                                                        {row.name}
                                                    </span>
-
                                                </div>
+                                           </TableCell>
 
-
-
-                                               
-
+                                           <TableCell align='right' >
+                                               {symbol}{" "}
+                                               {numberWithCommas(row.current_price.toFixed(2))}
                                            </TableCell>
                                             
                                        </TableRow>
