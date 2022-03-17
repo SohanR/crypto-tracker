@@ -44,6 +44,18 @@ const CoinPage = () => {
       alignItems:"center",
       marginTop:25,
       borderRight:"2px solid grey"
+    },
+    heading:{
+      fontWeight:"bold",
+      marginBottom:20,
+      fontFamily:"Montserrat"
+    },
+    description:{
+      width:"100%",
+      fontFamily:"Montserrat",
+      paddingBottom:15,
+      padding:25,
+      textAlign:"justify",            
     }
   }));
 
